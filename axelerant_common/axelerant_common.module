@@ -21,6 +21,7 @@ function axelerant_common_form_system_site_information_settings_alter(&$form, Fo
 }
 
 /**
+ * Custom handler to store site settings form.
  * @param $form
  * @param FormStateInterface $form_state
  */
