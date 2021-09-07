@@ -11,7 +11,7 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
- * Controller for export json.
+ * ExportPageController Class.
  */
 class ExportPageController extends ControllerBase {
 
