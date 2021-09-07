@@ -1,0 +1,5 @@
+name: 'Axelerant Common'
+description: 'Contains miscellaneous functionality used throughout Axelerant.'
+package: 'Axelerant'
+core_version_requirement: ^8 || ^9
+type: module

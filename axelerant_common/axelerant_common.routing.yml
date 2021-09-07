@@ -1,0 +1,7 @@
+axelerant_common.data:
+  path: '/page_json/{siteapikey}/{nid}'
+  defaults:
+    _controller: '\Drupal\axelerant_common\Controller\ExportPageController::index'
+    _title: 'Export page'
+  requirements:
+    _custom_access: '\Drupal\axelerant_common\Controller\ExportPageController::access'

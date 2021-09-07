@@ -1,0 +1,38 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function axelerant_common_form_system_site_information_settings_alter(&$form, FormStateInterface &$form_state) {
+  $config = \Drupal::config('system.site');
+  $site_api_key = $config->get('siteapikey') ?: 'No API Key yet';
+  $form['site_information']['site_api_key'] = [
+    '#type' => 'textfield',
+    '#title' => t('Site API Key'),
+    '#default_value' => $site_api_key,
+    '#description' => t('The Site API Key.'),
+  ];
+  // Overrides default button text.
+  $form['actions']['submit']['#value'] = t('Update Configuration');
+  // Add custom submit handler.
+  $form['#submit'][] = 'axelerant_common_site_settings_form_submit';
+}
+
+/**
+ * @param $form
+ * @param FormStateInterface $form_state
+ */
+function axelerant_common_site_settings_form_submit($form, FormStateInterface $form_state) {
+  $config = \Drupal::service('config.factory')->getEditable('system.site');
+  $site_api_key = $form_state->getValue('site_api_key');
+  $config->set('siteapikey', $site_api_key);
+  $config->save();
+  $messenger = \Drupal::messenger();
+  // Attempt to notify user.
+  $messenger->addStatus(t('Site API Key has been saved with the value @site_api', [
+    '@site_api' => $site_api_key
+  ]));
+}
+
